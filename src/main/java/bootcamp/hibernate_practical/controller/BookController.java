@@ -3,7 +3,9 @@ package bootcamp.hibernate_practical.controller;
 import bootcamp.hibernate_practical.dto.BookResponse;
 import bootcamp.hibernate_practical.dto.CreateBookRequest;
 import bootcamp.hibernate_practical.dto.UpdateBookRequest;
+import bootcamp.hibernate_practical.entity.Book;
 import bootcamp.hibernate_practical.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,43 +20,59 @@ public class BookController {
     }
 
     @PostMapping
-    public BookResponse createBook(@RequestBody CreateBookRequest createBookRequest) {
+    public BookResponse createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
         return bookService.createBook(createBookRequest);
     }
 
     @GetMapping
     public List<BookResponse> getAllBooks() {
-        // TODO
-        return null;
+
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}")
     public BookResponse getBookById(@PathVariable Long id) {
-        // TODO
-        return null;
+
+        return bookService.getBookById(id);
     }
 
     @PutMapping("/{id}")
-    public BookResponse updateBook(@PathVariable Long id, @RequestBody UpdateBookRequest updateBookRequest) {
-        // TODO
-        return null;
+    public BookResponse updateBook(@Valid @PathVariable Long id, @RequestBody UpdateBookRequest updateBookRequest) {
+        return bookService.updateBook(id, updateBookRequest);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        // TODO
+
+        bookService.deleteBook(id);
     }
 
     @GetMapping("/author/{author}")
     public List<BookResponse> getBooksByAuthor(@PathVariable String author) {
-        // TODO
-        return null;
+
+        return bookService.findByAuthor(author);
     }
 
     @GetMapping("/available")
     public List<BookResponse> getAvailableBooks() {
-        // TODO
-        return null;
+
+        return bookService.findAvailableBooks();
+    }
+
+    @GetMapping("/year/{publicationYear}")
+
+    public List<BookResponse> findBooksPublishedAfter(@PathVariable int publicationYear) {
+        return bookService.findBooksPublishedAfter(publicationYear);
+    }
+
+    @GetMapping("/count")
+        public long countBooks(){
+            return bookService.countBooks();
+        }
+
+    @GetMapping("/search")
+    public List<BookResponse> findBooksByPartialTitle(@RequestParam String title){
+        return bookService.findBooksByPartialTitle(title);
     }
 
 }
