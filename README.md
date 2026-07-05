@@ -1,21 +1,49 @@
-# Practical Task: Library Book Tracker API
+# Library Book Tracker API
 
-Starter project for Data Architecture practical task: Build a REST API for managing books in a library using Spring Boot, Spring Data JPA and an H2 database.
+## Practical Task
 
-## Task
-Complete all of the 'TODO' portions of the code. The finished application should compile and all of the controller endpoints should be functional.
+Implemented a REST API for managing a library's book inventory using Spring Boot, Spring Data JPA and H2 database.
 
-## Behavioural Requirements
-- Books can be created
-- All books can be retrieved
-- A single book can be retrieved by ID
-- Books can be deleted
-- Books can be filtered and searched by their fields.
-- Controller delegates to Service, which delegates to Repository
-- DTOs are used for requests and responses
+### Core Functionality Implemented
 
-## Stretch goals
-- Request validation
+- Created REST endpoints for managing books.
+- Implemented the ability to:
+  - Create a new book.
+  - Retrieve all books.
+  - Retrieve a single book by its ID.
+  - Update an existing book.
+  - Delete a book.
+- Implemented searching books by author.
+- Implemented retrieving only available books.
+- Used DTOs (`CreateBookRequest`, `UpdateBookRequest`, `BookResponse`) for request and response handling.
+- Implemented layered architecture:
+  - Controller
+  - Service
+  - Repository
+- Used Spring Data JPA for database operations.
+- Used an H2 in-memory database for data persistence.
+
+## Bonus Features Implemented
+
+- Added request validation using Jakarta Validation:
+  - `@NotBlank`
+  - `@Positive`
+  - `@Valid`
+- Implemented searching books published after a given year.
+- Implemented searching books by partial title.
+- Added an endpoint to return the total number of books in the library.
+- Implemented custom exception handling using:
+  - `BookNotFoundException`
+  - `@ControllerAdvice`
+  - `@ExceptionHandler`
+  - GlobalExceptionHandler
+- Added structured JSON error responses using a Java Record (`ErrorResponse`).
+
+## Testing
+
+The application was tested using Postman to verify:
+
+- CRUD operations
+- Validation
+- Search endpoints
 - Custom exception handling
-- Searching by partial title
-- Add 'borrow' and 'return' endpoints along with the new 'borrowedStatus' field to the Book entity
