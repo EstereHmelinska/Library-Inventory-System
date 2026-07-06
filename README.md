@@ -1,4 +1,4 @@
-# Library Book Tracker API
+# Library Book Tracker API + Spring Security
 
 ## Practical Task
 
@@ -39,11 +39,65 @@ Implemented a REST API for managing a library's book inventory using Spring Boot
   - GlobalExceptionHandler
 - Added structured JSON error responses using a Java Record (`ErrorResponse`).
 
+# Spring Security
+## Basic Authentication
+
+Implemented Spring Security using HTTP Basic Authentication.
+
+## Features implemented:
+
+- BCrypt password encoding.
+- Two in-memory users:
+  - `user` with role `USER`
+  - `admin` with role `ADMIN`
+- Stateless session management.
+- GET endpoints accessible to authenticated users.
+- POST, PUT and DELETE endpoints accessible only to users with the `ADMIN` role.
+
+### Implementation available in branch:
+`feature/basic-auth-security`
+
+## JWT Authentication (Stretch Goal)
+
+Extended the project by replacing Basic Authentication with JWT (JSON Web Token) authentication.
+
+## Implemented:
+
+- JWT token generation after successful login.
+- `/auth/login` endpoint for user authentication.
+- Custom `JwtAuthenticationFilter` for validating JWTs on every request.
+- Token-based authentication using the `Authorization: Bearer <token>` header.
+- Secret key stored in `application.properties`.
+- Role-based authorization using JWT.
+- Stateless authentication without server-side sessions.
+
+### Implementation available in branch:
+`feature/jwt-authentication`
+
 ## Testing
 
-The application was tested using Postman to verify:
+The application was tested using Postman.
+
+Verified functionality includes:
 
 - CRUD operations
-- Validation
+- Request validation
 - Search endpoints
 - Custom exception handling
+- HTTP Basic Authentication
+- JWT login and token generation
+- Access to protected endpoints using Bearer tokens
+- Role-based authorization (`USER` vs `ADMIN`)
+- Unauthorized and forbidden access scenarios
+
+## Technologies Used
+
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- Spring Security
+- JWT 
+- H2 Database
+- Lombok
+- Maven
+- Postman
