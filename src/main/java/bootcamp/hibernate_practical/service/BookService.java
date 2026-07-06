@@ -58,6 +58,10 @@ public class BookService {
                 .orElseThrow(() -> new BookNotFoundException("Book not found"));
         // Update its fields
         book.setTitle(request.getTitle());
+        book.setAuthor(request.getAuthor());
+        book.setGenre(request.getGenre());
+        book.setPublicationYear(request.getPublicationYear());
+        book.setAvailable(request.isAvailable());
         // Save the updated entity
         Book updatedBook = bookRepository.save(book);
         // Convert to BookResponse
